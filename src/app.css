@@ -1,3 +1,35 @@
 :root {
 	--typography-spacing-vertical: 1rem;
 }
+
+/* margin */
+.m-0 {
+	margin: 0;
+}
+
+/* padding */
+.p-0 {
+	padding: 0;
+}
+
+.p-1 {
+	padding: 1rem;
+}
+
+/* screen */
+.h-full {
+	height: 100vh;
+}
+
+/* layout */
+.flex-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+@media (min-width: 1400px) {
+	.container {
+		max-width: 1320px;
+	}
+}
