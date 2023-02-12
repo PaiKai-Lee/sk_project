@@ -1,0 +1,56 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                Int        @id @default(autoincrement())
+  name              String         /// 使用者姓名
+  password          String        
+  email             String        @unique
+  department        String
+  role              Role /// 權限等級
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  createdBy         String        @default("system")
+  updatedBy         String        @default("system")
+  isDelete          Boolean       @default(false) /// 軟刪除
+  pwdChanged        Int           @default(0) /// 密碼電更次數
+  points            Int @default(0)
+
+  transactions Transaction[]
+  orders            Order[]
+}
+
+enum Role {
+  SuperAdmin
+  Admin
+  User
+}
+
+model Transaction {
+  id      Int  @id @default(autoincrement())
+  userId  Int?
+  user    User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+  orderId String
+  order  Order   @relation(fields: [orderId], references: [id])
+  credit  Int
+  debit Int
+  remark String?
+}
+
+model Order {
+  id           String        @id @default(uuid())
+  createdById  Int
+  createdBy    User          @relation(fields: [createdById], references: [id])
+  createdAt    DateTime      @default(now())
+  transactions Transaction[]
+}
+

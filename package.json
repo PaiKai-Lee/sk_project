@@ -2,6 +2,9 @@
 	"name": "sk-project",
 	"version": "0.0.1",
 	"private": true,
+	"prisma": {
+		"seed": "npx vite-node prisma/seed.js"
+	},
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
@@ -16,10 +19,15 @@
 		"@sveltejs/kit": "^1.5.0",
 		"prettier": "^2.8.0",
 		"prettier-plugin-svelte": "^2.8.1",
+		"prisma": "^4.10.1",
 		"svelte": "^3.54.0",
 		"svelte-check": "^3.0.1",
 		"typescript": "^4.9.3",
 		"vite": "^4.0.0"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"@picocss/pico": "^1.5.7",
+		"@prisma/client": "^4.10.1"
+	}
 }
